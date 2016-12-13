@@ -1,0 +1,56 @@
+/*css used for account management*/
+
+.login-form-back {
+
+  padding: 15px 12px 15px 12px;
+  /*background: rgba(0, 0, 0, 0.7);*/
+  border-radius: 4px 4px 4px 4px;
+}
+
+.signin-form-back {
+
+  padding: 15px 12px 15px 12px;
+  /*background: rgba(0, 0, 0, 0.7);*/
+  border-radius: 4px 4px 4px 4px;
+}
+
+.form-signin .form-signin-heading,
+.checkbox {
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  margin-bottom: 15px;
+  text-decoration: none;
+}
+
+.error {
+  font-size: 15px;
+  color: #F5B041;
+}
+
+.message {
+  font-size: 15px;
+  color: #4169E1;
+}
+
+.confirm-div {
+  text-align: center;
+  margin: 20px;
+}
+
+.reset-password {
+
+  color: #000099;
+}
+
+.password-reset-div {
+  margin: 40px;
+}
+
+
+

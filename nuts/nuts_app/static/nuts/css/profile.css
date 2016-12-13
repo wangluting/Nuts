@@ -1,0 +1,106 @@
+.simple-profile {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.error {
+  font-size: 15px;
+  color: #F5B041;
+}
+
+.message {
+  font-size: 15px;
+  color: #4169E1;
+}
+
+.profile-div {
+
+  text-align: right;
+}
+
+.main-div {
+  padding-top:10px;
+  padding-bottom:70px;
+
+}
+
+.profile {
+  margin-left: 200px;
+  margin-right: 200px;
+  border-radius: 4px 4px 4px 4px;
+  text-align: center;
+}
+
+.lists-header {
+  font-size: 25px;
+  padding-top: 5px;
+  width: 180px;
+  text-align: center;
+  border: none;
+  /*background-color: rgb(51, 200, 255);*/
+}
+
+.lists {
+  background-color: rgba(242,243,244,0.3);
+  border-right-style: solid;
+  border-radius: 4px 4px 4px 4px;
+}
+
+.infor {
+  margin-top: 20px;
+  padding-top: 20px;
+  text-align: left;
+  background-color: rgba(242,243,244,0.3);
+}
+
+.profile-info {
+	list-style-type:none;
+	color: #454545;
+	margin-top: 10px;
+	margin-bottom: 25px;
+	padding-left: 20px;
+}
+
+.profile-name {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+.profile-name span {
+	margin-right: 15px;
+}
+.block {
+	 background-color: #ffffff;
+	 margin-bottom: 15px;
+}
+
+.block_content {
+	 padding: 20px 20px 10px 20px;
+}
+
+.btn {
+	margin-right: 20px;
+	background-color: Chocolate;
+	color: white;
+}
+
+.btn:hover {
+	margin-right: 20px;
+	background-color: saddlebrown;
+	color: white;
+}
+
+. btn_top {
+	float: right;
+	margin-right: 5px;
+}
+
+.progress-bar {
+	background-color: Chocolate;
+}
+
+.pg {
+	width: 80%;
+	float: right;
+	margin-bottom: 5px;
+}

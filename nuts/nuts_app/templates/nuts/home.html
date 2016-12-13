@@ -1,0 +1,133 @@
+{% extends "nuts/nuts_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Home page{% endblock %}
+
+{% block script %}
+<script src="{% static 'nuts/js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'nuts/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'nuts/js/dragula.min.js' %}"></script>
+<script src="{% static 'nuts/js/mydrag.js' %}"></script>
+<script src="{% static 'nuts/js/plan.js' %}"></script>
+<script src="{% static 'nuts/js/chat.js' %}"></script>
+
+
+<!-- surprise -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link href="{% static 'nuts/css/AdminLTE.min.css' %}" rel="stylesheet">
+
+	<link href="{% static 'nuts/css/chat.css' %}" rel="stylesheet">
+	<link href="{% static 'nuts/css/dragula.min.css' %}" rel="stylesheet">
+	<link href="{% static 'nuts/css/plan.css' %}" rel="stylesheet">
+
+	<!-- surprise -->
+	<link href="{% static 'nuts/css/surprise.css' %}" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block notlog_navbar %}
+{% endblock %}
+
+{% block container %}
+<input type="hidden" name="id" class="my_id" value="{{id}}">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+            <br>
+            <br>
+            <br>
+			<div class="row">
+				<div class="col-md-6 left">
+                    <h3 id="time"></h3>
+				</div>
+				<br>
+				<div class="col-md-6 right">
+                    <a href="{% url 'create_plan' %}" class="mybtn">Create</a>
+				</div>
+			</div>
+            <br>
+            <br>
+			<div class="row">
+				<div class="col-md-4 center">
+					<div class="row">
+						<div class="col-md-12">
+                            <h4>Todo</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 container state_box" id="TODO">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 center">
+					<div class="row">
+						<div class="col-md-12">
+                            <h4>Doing</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 container state_box" id="DOING">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 center">
+					<div class="row">
+						<div class="col-md-12">
+                            <h4>Done</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 container state_box" id="DONE">
+						</div>
+					</div>
+				</div>
+			</div>
+            <br>
+            <br>
+			<div class="row">
+				<div class="col-md-6 left">
+					<p>&#9829: public &#9827: private</p>
+				</div>
+				<div class="col-md-6 right">
+                    <a href="{% url 'my_plan' %}" id="viewall">Calendar View</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1">
+		</div>
+
+	</div>
+</div>
+
+<!-- bw  surprise -->
+<div class="foreground">
+<main class="wrapper--main">
+  <div class="card__contents" style="visibility: hidden; opacity: 0; transform: matrix(0, 0, 0, 0, 0, 0);">
+	  <div class="contents__wrapper" id="contents_wrapper">
+	  <div id="card_titile"></div>
+	  <div>
+	  <img alt="Brand" class="brand_img" src="{% static 'nuts/images/gift-icon.png' %}">
+	  </div>
+	  <div id="card_content"></div>
+
+	  <a class="close">x</a>
+	  </div>
+  </div>
+</main>
+</div>
+
+
+
+<div id="chat_div"></div>
+{% endblock %}

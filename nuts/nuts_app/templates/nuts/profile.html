@@ -1,0 +1,197 @@
+{% extends "nuts/nuts_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Profile{% endblock %}
+
+{% block css %}
+<link href="{% static "nuts/css/profile.css" %}" rel="stylesheet">
+<link href="{% static "nuts/css/display.css" %}" rel="stylesheet">
+    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link href="{% static 'nuts/css/AdminLTE.min.css' %}" rel="stylesheet">
+	<link href="{% static 'nuts/css/chat.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block notlog_navbar %}
+{% endblock %}
+
+{% block container %}
+<br>
+<div class="container col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<div class="container-fluid simple-profile">
+<input type="hidden" name="id" class="user_id" value="{{user.id}}">
+{% if profile.image %} 
+<img src="{% url 'get_photo' user.id %}" alt="{{user.username}}" class="profile_img">
+{% endif %}
+  {% if user %}
+  <span><h2 class="profile_username">{{user.username}}</h2></span>
+  {% endif %}
+  
+  {% if flag == 2 %}
+           {% if follow == True %}
+              <button class="btn btn_top follow">Follow</button>
+            {% endif %}
+            {% if follow == False %}
+              <button class="btn btn_top follow">Unfollow</button>
+            {% endif %}
+              <!--<button class="btn btn_top btn-message">Message</button>-->
+          {% endif %}
+</div>  
+
+<div id="lists">
+	<ul class="nav nav-tabs">
+  	<li role="presentation" class="active display_choice get_profile"><a href="#">Profile</a></li>
+		<li role="presentation" class="display_choice get_nuts"><a href="#">Nuts</a></li>
+	 </ul>
+    <!-- end row -->
+  <div class="block profile_block">
+  <div class="block_content">
+    {% for message in messages %}
+    <div class="row profile-div">
+      <p class="message">{{message}}</p>
+    </div>
+    {% endfor %}
+
+    {% for error in errors %}
+    <div class="row profile-div">
+      <p class="error">{{error}}</p>
+    <div class="row profile-div">
+    {% endfor %}
+
+    <div class="row main-div">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab0">
+
+          {% if user %}
+          <ul class="profile-info">
+          <li class="profile-name"><span class="glyphicon glyphicon-pawn"></span><span class="level">level 1</span>
+          <span class="progress pg">
+  			<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 60%;">
+   			 {{profile.point}}
+  			</div>
+		  </span>
+		  </li>
+    	      <li class="profile-name"><span class="glyphicon glyphicon-user"></span>{{user.first_name}} {{user.last_name}}</li>
+    	      <li class="profile-name"><span class="glyphicon glyphicon-dashboard"></span>{{profile.age}} years old</li>	        
+    	      <li class="profile-name"><span class="glyphicon glyphicon-envelope"></span>{{user.email}}</li>	        
+    	      <li class="profile-name"><span class="glyphicon glyphicon-map-marker"></span>{{profile.location}}</li>
+    	      <li class="profile-name"><span class="glyphicon glyphicon-book"></span>{{profile.description}}
+    	      </li>
+	       </ul>
+          {% endif %}
+
+          {% if flag == 1 %}
+          <div class="row profile-div">
+            <a href="{% url 'edit_profile' %}"><button class="btn btn-lg">Edit Profile</button></a>
+          </div>
+
+          {% for field in passwordform.visible_fields %}
+            {% for error in field.errors %}
+              <p class="message">{{error}}</p>
+            {% endfor %}
+          {% endfor %}
+
+          <form role="form" action="{% url 'change_password' %}" method="POST"> 
+            <table class="table infor">
+            <tbody>
+              <tr>
+                <td>Change password:</td>
+                <td>
+                  <input type="password" name="old_password" class="form-control password-input" placeholder="Old password" required>
+                </td>
+                <td>
+                  <input type="password" name="new_password1" class="form-control password-input" placeholder="New password" required>
+                </td>
+                <td>
+                  <input type="password" name="new_password2" class="form-control password-input" placeholder="Confirm new password" required>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+            <div class="row profile-div">
+            <button class="btn btn-lg">Change password</button>
+            </div>
+            {% csrf_token %}
+          </form>
+          {% endif %}
+        </div>
+        <!-- tab1 -->
+      </div>
+      <!-- table content -->
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="nuts" style="display: none;">
+	  {% for nut in nuts %}
+	  <div class="block">
+	    <div class="block_content">
+	      <a href="{% url 'show_profile' nut.author.id %}" class="plan_img_link" role="button">
+	        <img src="{% url 'get_photo' nut.author.id %}" class="img-responsive plan_img" alt="{{nut.author.username}}">
+	      </a>
+
+        <div class="plan" id="{{nut.id}}">
+          <div class="plan_title"><a href="{% url 'view_plan' nut.id %}">{{nut.title}}</a>
+          </div>
+          <a href="{% url 'show_profile' nut.author.id %}" class="plan_author">{{nut.author}}</a>
+          <span class="plan_expire">expires: {{nut.expire_time}}</span>
+          <div class="plan_description">{{nut.description}}</div>
+
+          <div class="row like-div">
+            <div class="col-sm-6 plan_time">posted on: {{nut.timestamp}}</div>
+            <div class="col-sm-6">
+            <p class="like-row"> <span class="like_num">{{nut.liked_user.count}}</span>  people like it. &#x2764   
+
+            {% if nut.id in like_nut_ids %}
+            <a class="like" onclick="like()">Unlike</a>
+            {% else %}
+            <a class="like" onclick="like()">Like</a>
+            {% endif %}
+
+            </p>
+            </div>
+          </div>
+          
+          <div id="comments">
+            {% for comment in comments %}
+            {% if comment.nut.id == nut.id %}
+            <div>
+            <img src="/nuts/photo/{{comment.user.id}}/" alt="{{comment.user.username}}" class="img-circle avatar">
+            <div class="comment_body">
+            <a href="/nuts/show-profile/{{comment.user.id}}/" class="plan_author">{{comment.user.username}}</a>
+            <span class="plan_time">{{comment.timestamp}}</span>
+            <p class="">{{comment.text}}</p>
+            </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="col-sm-offset-0 col-sm-7 comment">
+          <input class="form-control" id="comment-field-{{nut.id}}" type="text">
+          </div>
+          <button class="btn" onclick="addComment({{nut.id}})" id="add-btn">Comment</button>
+          <input type="hidden" name="id" class="nut_id" value="{{nut.id}}">
+        </div>
+
+
+	    </div>
+	  </div>
+	  {% endfor %}
+	  </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static "nuts/js/display.js" %}"></script>
+  <script src="{% static "nuts/js/chat.js" %}"></script>
+  <script src="{% static "nuts/js/profile.js" %}"></script>
+{% endblock %}
+
+

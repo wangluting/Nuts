@@ -1,0 +1,7 @@
+{  
+  "nut_id": {{comment.nut_id}},
+  "user_id": {{comment.user_id}},
+  "comment": "{{comment.text}}",
+  "time":"{{comment.timestamp}}",
+  "username": "{{comment.user.username}}"
+}

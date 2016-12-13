@@ -1,0 +1,157 @@
+{% extends "nuts/nuts_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Search Nuts{% endblock %}
+
+{% block css %}
+<link href="{% static 'nuts/css/display.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link href="{% static 'nuts/css/AdminLTE.min.css' %}" rel="stylesheet">
+  <link href="{% static 'nuts/css/chat.css' %}" rel="stylesheet">
+  <link href="{% static 'nuts/css/jQuery.sortpaginate.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block notlog_navbar %}
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'display_home' %}">
+          <img alt="Brand" class="brand_img" src="{% static "nuts/images/brand.jpg" %}">
+          Nuts
+        </a>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'display_home' %}">Home <span class="badge"></span></a></li>
+            <li class="active"><a href="{% url 'global_plans' %}">More nuts <span class="badge"></span></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'show_profile' request.user.id %}">My profile</a></li>
+                <li><a href="{% url 'show_profile' request.user.id %}">Reset password</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Messages</a></li>
+                <li role="separator" class="divider"></li>
+               <li><a href="{% url 'logout' %}">Log out</a></li>
+              </ul>
+             </li>
+           </ul>    
+          
+          <form class="navbar-form navbar-right" role="search" action="{% url 'search_plan' %}" method="POST">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Keyword" name="keyword">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+          {% csrf_token %}
+          </form>
+
+        </div>
+      </div>
+    </nav>
+{% endblock %}
+
+
+{% block container %}
+    <div class="container col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+      <h3>Nuts based on your search:</h3>
+
+      {% for error in errors %}
+      <p class="error">{{error}}</p>
+      {% endfor %}
+
+      {% if flag == 1 %}
+      <h3 class="no-nuts">No nuts retrieved...</h3>
+      {% endif %}
+
+      {% if flag == 0 %}
+      <div class="nuts">
+      <table class="table table-bordered table-striped">
+        <tbody class="tbody">
+            {% for nut in nuts %}
+                <tr>
+                <td>
+                  <div class="block">
+                    <div class="block_content">
+                      <a href="{% url 'show_profile' nut.author.id %}" class="plan_img_link" role="button">
+                        <img src="{% url 'get_photo' nut.author.id %}" class="img-responsive plan_img" alt="{{nut.author.username}}">
+                      </a>
+
+                    <div class="plan" id="{{nut.id}}">
+                      <div class="plan_title"><a href="{% url 'view_plan' nut.id %}">{{nut.title}}</a>
+                      </div>
+                      <a href="{% url 'show_profile' nut.author.id %}" class="plan_author">{{nut.author}}</a>
+                      <span class="plan_expire">expires: {{nut.expire_time}}</span>
+                      <div class="plan_description">{{nut.description}}</div>
+
+                      <div class="row like-div">
+                        <div class="col-sm-8 plan_time">posted on: {{nut.timestamp}}</div>
+                        <div class="col-sm-4">
+                        <p class="like-row"> <span class="like_num">{{nut.liked_user.count}}</span>  people like it. &#x2764   
+
+                        {% if nut.id in like_nut_ids %}
+                        <a class="like" onclick="like()">Unlike</a>
+                        {% else %}
+                        <a class="like" onclick="like()">Like</a>
+                        {% endif %}
+
+                        </p>
+                        </div>
+                      </div>
+                      
+                      <div id="comments">
+                        {% for comment in comments %}
+                        {% if comment.nut.id == nut.id %}
+                        <div>
+                        <img src="/nuts/photo/{{comment.user.id}}/" alt="{{comment.user.username}}" class="img-circle avatar">
+                        <div class="comment_body">
+                        <a href="/nuts/show-profile/{{comment.user.id}}/" class="plan_author">{{comment.user.username}}</a>
+                        <span class="plan_time">{{comment.timestamp}}</span>
+                        <p class="">{{comment.text}}</p>
+                        </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                      </div>
+
+                      <div class="col-sm-offset-0 col-sm-7 comment">
+                      <input class="form-control" id="comment-field-{{nut.id}}" type="text">
+                      </div>
+                      <button class="btn" onclick="addComment({{nut.id}})" id="add-btn">Comment</button>
+                      <input type="hidden" name="id" class="nut_id" value="{{nut.id}}">
+                    </div>
+
+                    </div>
+                  </div>
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>  
+      </div>
+      {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static "nuts/js/display.js" %}"></script>
+    <script src="{% static "nuts/js/chat.js" %}"></script>
+    <script src="{% static "nuts/js/jQuery.sortpaginate.js" %}"></script>
+
+    <script type='text/javascript'>
+    $(function () {
+        $("table").sortpaginate();
+    });
+    </script>
+
+    <style>
+    body { background-color:#fafafa;}
+    </style>
+
+{% endblock %}

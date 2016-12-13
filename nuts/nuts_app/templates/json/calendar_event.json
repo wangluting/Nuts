@@ -1,0 +1,12 @@
+[
+	  {% for nut in nuts %}
+	  {"id": "{{nut.id}}",
+	  "title" : "{{nut.title}}", 
+	  "start" : "{{nut.start}}", 
+	  "end" : "{{nut.end}}", 
+	  "backgroundColor" : "{{nut.color}}",
+	  "borderColor" : "{{nut.color}}",
+	  "textColor" : "white",
+	  "allDay": true}
+	  {% if not forloop.last %}, {% endif %}{% endfor %}
+  ]

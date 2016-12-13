@@ -1,0 +1,84 @@
+{% extends "nuts/nuts_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}All plans page{% endblock %}
+
+{% block script %}
+<script src="{% static 'nuts/js/jquery-3.1.1.js' %}"></script>
+<script src="{% static 'nuts/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'nuts/js/fullcalendar/moment.min.js' %}"></script>
+	<script src="{% static 'nuts/js/fullcalendar/fullcalendar.js' %}"></script>
+	<script src="{% static 'nuts/js/xcConfirm.js' %}"></script>
+	<script src="{% static 'nuts/js/calendar.js' %}"></script>
+	<script src="{% static 'nuts/js/myplan.js' %}"></script>
+{% endblock %}
+
+{% block css %}
+<link href="{% static 'nuts/css/plan.css' %}" rel="stylesheet">
+<link href="{% static 'nuts/css/xcConfirm.css' %}" rel="stylesheet">
+<link href="{% static 'nuts/css/fullcalendar/fullcalendar.css' %}" rel="stylesheet" >
+{% endblock %}
+
+{% block navbar %}
+  	<nav class="navbar navbar-default navbar-fixed-top">
+  	  <div class="container">
+        <a class="navbar-brand" href="{% url 'display_home' %}">
+          <img alt="Brand" class="brand_img" src="{% static "nuts/images/brand.jpg" %}">
+          Nuts
+        </a>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'display_home' %}">Home <span class="badge"></span></a></li>
+            <li><a href="{% url 'global_plans' %}">More nuts <span class="badge"></span></a></li>
+          </ul>
+		  <ul class="nav navbar-nav navbar-right">
+    	    <li class="dropdown">
+ 	         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
+    	      <ul class="dropdown-menu">
+        	    <li><a href="{% url 'show_profile' request.user.id %}">My profile</a></li>
+ 	            <li><a href="{% url 'show_profile' request.user.id %}">Reset password</a></li>
+        	    <li role="separator" class="divider"></li>
+ 	           <li><a href="{% url 'logout' %}">Log out</a></li>
+    	      </ul>
+     	  	 </li>
+   		   </ul>	
+	    
+      <form class="navbar-form navbar-right" role="search" action="{% url 'search_plan' %}" method="POST">
+		 	<div class="form-group">
+			  <input type="text" class="form-control" placeholder="Keyword" name="keyword">
+			</div>
+			<button type="submit" class="btn btn-default">Search</button>
+      {% csrf_token %}
+		  </form>
+
+      </div>
+  	  </div>
+	</nav>
+	{% endblock %}
+
+{% block notlog_navbar %}
+{% endblock %}
+
+{% block container %}
+<div class="container col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-1">
+	<div class="block">
+	    <div class="block_content right">
+			<div id="calendar"></div>
+			<span class="explain" id="todo">todo state</span>
+			<span class="explain" id="doing">doing state</span>
+			<span class="explain" id="following">followed plan state</span>
+	    </div>
+	</div>
+</div>
+
+<form action="" method="post" id="hidden_form" style="display: none;">
+	<input type="hidden" name="start" id="start" value="" />
+	<input type="hidden" name="end" id="end" value="" />
+	{% csrf_token %}
+</form>
+
+{% endblock %}
+
+{% block chat %}
+{% endblock %}

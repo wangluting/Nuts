@@ -1,0 +1,36 @@
+
+.sp_wrapper .sp_table table { table-layout: fixed; }
+
+.sp_wrapper .sp_table thead th {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.sp_wrapper .sp_table .sp_next .sp_previous {
+
+  background-position: right center;
+  background-repeat: no-repeat;
+
+}
+
+
+.sp_wrapper .sp_next, .sp_wrapper .sp_previous {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.sp_navigator {
+  text-align: right;
+  padding-bottom: 50px;
+
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th {
+  border: 1px solid rgba(226, 226, 33, 0);
+}
+
+
+
+
+
+
+

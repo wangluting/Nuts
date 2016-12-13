@@ -1,0 +1,86 @@
+{% extends "nuts/nuts_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Profile{% endblock %}
+
+{% block css %}
+<link href="{% static "nuts/css/profile.css" %}" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link href="{% static 'nuts/css/AdminLTE.min.css' %}" rel="stylesheet">
+	<link href="{% static 'nuts/css/chat.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block notlog_navbar %}
+{% endblock %}
+
+
+{% block container %}
+
+<br>
+<div class="container col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="container-fluid simple-profile">
+  <input type="hidden" name="id" class="user_id" value="{{user.id}}">
+  {% if form.image.value %}
+  <img src="{% url 'get_photo' user.id %}" alt="{{form.user.username" class="profile_img">
+  {% endif %}
+  {% if user %}
+  <h3><span>{{user.username}}</span></h3><br>
+  {% endif %}
+  </div>  
+
+  <div id="lists">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active display_choice get_profile"><a href="#">Profile</a></li>
+    </ul>
+    <div class="block profile_block">
+    <div class="block_content">
+      {% for message in messages %}
+      <div class="row profile-div">
+        <p class="message">{{message}}</p>
+      </div>
+      {% endfor %}
+
+      {% for error in errors %}
+      <div class="row profile-div">
+        <p class="error">{{error}}</p>
+      </div>
+      {% endfor %}
+
+      <form enctype="multipart/form-data" action="{% url 'edit_profile' %}" method="POST"> 
+        <table class="table infor">
+         
+          <tbody>
+            {% for field in form.visible_fields %}
+            <tr>
+              <td>{{field.label_tag}}</td>
+              <td>{{field}}</td>
+              <td style="color:red">{{field.errors}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>   
+        </table>
+        <div class="row profile-div">
+          <button class="btn btn-lg btn-primary profile-btn">Save profile</button>
+        </div>
+        {% csrf_token %}
+      </form>
+      <br>
+      <div class="row profile-div">
+        <a href="{% url 'show_profile' user.id %}"><button class="btn btn-lg btn-info profile-btn">Cancel</button></a>
+      </div>
+      <br>
+      <br>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static "nuts/js/display.js" %}"></script>
+  <script src="{% static "nuts/js/chat.js" %}"></script>
+{% endblock %}

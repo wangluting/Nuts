@@ -1,0 +1,1 @@
+{"id":{{nut.id}}, "html":"{{nut.html|safe}}"}

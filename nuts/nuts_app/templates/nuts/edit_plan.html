@@ -1,0 +1,70 @@
+{% extends "nuts/nuts_base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Edit plan{% endblock %}
+
+{% block js %}
+	<script src="{% static 'nuts/js/chat.js' %}"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRlvj79J09-DaBazSt1XLEQo1S394Mwg&libraries=places&sensor=false"></script>
+    <script src="{% static 'nuts/js/mapsed.js' %}"></script>
+    <script src="{% static 'nuts/js/editmap.js' %}"></script>
+{% endblock %}	
+
+{% block css %}
+<link href="{% static 'nuts/css/plan.css' %}" rel="stylesheet">
+
+    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link href="{% static 'nuts/css/AdminLTE.min.css' %}" rel="stylesheet">
+	<link href="{% static 'nuts/css/chat.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block notlog_navbar %}
+{% endblock %}
+
+{% block container %}
+<div class="container col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+  <div class="block">
+  <div class="block_content">
+      <h2 id="nutTit">Edit a Nut</h2>
+      <a id="deletebtn" href='#' onclick='confirmUser()'>Delete</a>
+      <form method="post" action="{% url 'edit_plan' id %}">
+        {% for field in form.visible_fields %}
+            <div class="form-group">
+            {{field.label_tag}}
+             <br>
+            {{field}}
+             <br>
+            {{field.errors}}
+            </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            <p class="error">{{ field }}</p>
+        {% endfor %}
+        {% if lat != 0 %}
+          <div id="edit-places" class="maps"></div>
+          <input type="hidden" name="lat" id="lat" value={{lat}}>
+          <input type="hidden" name="lng" id="lng" value={{lng}}>
+        {% endif %}
+
+        <div class="right">
+            <button type="submit" class="addbtn">Edit</button>
+        </div>
+        {% csrf_token %}
+      </form>
+
+</div>
+</div></div>
+<script>
+ function confirmUser(){
+    var ask=confirm("Are you sure?");
+    if(ask){
+      window.location="{% url 'delete_plan' id %}";
+     }
+ }
+</script>
+
+{% endblock %}

@@ -1,0 +1,201 @@
+/* css used for plan */
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.error {
+    color:red;
+}
+.maps {
+    height: 300px;
+    width: 635px;
+}
+
+.wide {
+    width: 300px;
+    height: 35px;
+    background: rgba(200, 54, 54, 0.1);
+    display: inline-block;
+    white-space: nowrap;
+    border-radius: 10px;
+}
+
+.nutTitle{
+    font-size: 16px;
+    color: black;
+}
+
+#leftprofile {
+    background: rgba(200, 54, 54, 0.08);
+    display: inline-block;
+    white-space: nowrap;
+    border-radius: 10px;
+    width: 280px;
+    height: 600px;
+}
+
+#rightdetail {
+    background: rgba(192,192,192,0.1);
+    display: inline-block;
+    white-space: nowrap;
+    border-radius: 10px;
+    width: 750px;
+    height: 600px;
+}
+
+.eat {
+    width: 45px;
+    height: 23px;
+    background-color: rosybrown;
+    color: white;
+    font-size: 12px;
+}
+
+#nutExpiretime {
+    font-size: 10pt;
+}
+
+#nutTit {
+    #font-family: Sans-Serif;
+    color: saddlebrown;
+    bold:true;
+}
+
+#info {
+    #font-family: Sans-Serif;
+    color: dimgrey;
+    bold:true;
+    font-size: 16px;
+}
+
+#nutDesp {
+    font-size: 14pt;
+    color: rosybrown;
+    white-space:normal;
+}
+#nutState {
+    color: mediumvioletred;
+}
+
+.mybtn {
+  display: inline-block;
+  padding: 6px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: rosybrown;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+
+}
+
+.mybtn:hover{
+	background-color: Chocolate;
+	color: white;
+}
+
+.mybtn:active {
+  background-color: saddlebrown;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.addbtn {
+  display: inline-block;
+  padding: 6px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: saddlebrown;
+  border: none;
+
+}
+
+.addbtn:hover {
+	background-color: Chocolate;
+	color: white;
+}
+
+.addbtn:active {
+  background-color: rosybrown;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+#time, #title, #timerange {
+    color: saddlebrown;
+}
+
+#followers {
+    color:mediumvioletred;
+}
+
+
+#viewall {
+    color: brown;
+    font-size: 16px;
+}
+
+.explain {
+	margin-top: 5px;
+}
+
+#todo {
+	padding: 4px;
+	color: #fff;
+    background-color: rosybrown;
+    border-radius: 4px;
+}
+
+#doing {
+	padding: 4px;
+	color: #fff;
+    background-color: steelblue;
+    border-radius: 4px;
+}
+
+#following {
+	padding: 4px;
+	color: #fff;
+    background-color: LightSeaGreen;
+    border-radius: 4px;
+}
+
+.surprise {
+    text-align: center;
+    
+}
+
+.state_box {
+	width: 320px;
+	background: white;
+	min-height: 250px;
+	margin-left: 20px;
+	margin-right: 20px;
+	border-radius:25px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+a:link {
+    color:black;
+}

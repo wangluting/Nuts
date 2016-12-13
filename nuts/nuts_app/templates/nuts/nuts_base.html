@@ -1,0 +1,175 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content={% block content %}{% endblock %}>
+    <meta name="author" content="TongLiu">
+    
+    <title>{% block title %}{% endblock %}</title>
+
+	{% load static %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "nuts/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "nuts/css/nuts_base.css" %}" rel="stylesheet">
+    
+    <!-- Custom js for this template -->
+    {% block script %}
+    
+	<script src="{% static "nuts/js/jquery-3.1.1.js" %}"></script>
+	<script src="{% static "nuts/js/bootstrap.min.js" %}"></script>
+    {% endblock %}
+    
+    <!-- Custom styles for this template -->
+    {% block css %}
+    {% endblock %}    
+
+  </head>
+  <body>
+	{% block navbar %}
+  	<nav class="navbar navbar-default navbar-fixed-top">
+  	  <div class="container">
+        <a class="navbar-brand" href="{% url 'display_home' %}">
+          <img alt="Brand" class="brand_img" src="{% static "nuts/images/brand.jpg" %}">
+          Nuts
+        </a>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'display_home' %}">Home <span class="badge"></span></a></li>
+            <li><a href="{% url 'global_plans' %}">More nuts <span class="badge"></span></a></li>
+          </ul>
+		  <ul class="nav navbar-nav navbar-right">
+    	    <li class="dropdown">
+ 	         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
+    	      <ul class="dropdown-menu">
+        	    <li><a href="{% url 'show_profile' request.user.id %}">My profile</a></li>
+ 	            <li><a href="{% url 'show_profile' request.user.id %}">Reset password</a></li>
+        	    <li role="separator" class="divider"></li>
+ 	           <li><a href="{% url 'logout' %}">Log out</a></li>
+    	      </ul>
+     	  	 </li>
+   		   </ul>	
+	    
+      <form class="navbar-form navbar-right" role="search" action="{% url 'search_plan' %}" method="POST">
+		 	<div class="form-group">
+			  <input type="text" class="form-control" placeholder="Keyword" name="keyword">
+			</div>
+			<button type="submit" class="btn btn-default">Search</button>
+      {% csrf_token %}
+		  </form>
+
+      </div>
+  	  </div>
+	</nav>
+	{% endblock %}
+	
+	{% block notlog_navbar %}
+  	<nav class="navbar navbar-default navbar-fixed-top">
+  	  <div class="container">
+        <a class="navbar-brand" href="{% url 'login' %}">
+          <img alt="Brand" class="brand_img" src="{% static "nuts/images/brand.jpg" %}">
+          Nuts
+        </a>
+      
+      <div id="navbar" class="navbar-collapse collapse">
+      <form class="navbar-form navbar-right" role="search" action="{% url 'search_plan' %}" method="POST">
+		 	<div class="form-group">
+			  <input type="text" class="form-control" placeholder="Keyword" name="keyword">
+			</div>
+			<button type="submit" class="btn btn-default">Search</button>
+      {% csrf_token %}
+		  </form>
+      </div>
+
+  	  </div>
+	</nav>
+	{% endblock %}
+	
+	{% block container %}
+	<div class="container col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+	  <div class="block">
+	    <div class="block_content">
+	      <p>hhh</p>
+	    </div>
+	  </div>
+	</div>
+	{% endblock %}
+	
+	{% block chat %}
+	
+<div class="col-md-3" id="chat" style="display: none;">
+          <!-- DIRECT CHAT WARNING -->
+          <div class="box box-warning direct-chat direct-chat-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Direct Chat</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool btn-hide" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool btn-remove" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <!-- Conversations are loaded here -->
+              <div class="direct-chat-messages">
+                <!-- Message. Default to the left -->
+                <div class="direct-chat-msg direct-chat-msg-other" style="display: none;">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                    <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                  </div>
+                  <!-- /.direct-chat-info -->
+                  <img class="direct-chat-img" src="" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <div class="direct-chat-text">
+                    Is this template really for free? That's unbelievable!
+                  </div>
+                  <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+                <!-- Message to the right -->
+                <div class="direct-chat-msg right direct-chat-msg-mine" style="display: none;">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                  </div>
+                  <!-- /.direct-chat-info -->
+                  <img class="direct-chat-img" src="" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <div class="direct-chat-text">
+                    You better believe it!
+                  </div>
+                  <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+              </div>
+              <!--/.direct-chat-messages-->
+              <!-- /.direct-chat-pane -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <form action="#" method="post">
+                <div class="input-group">
+                  <input type="text" name="message" placeholder="Type Message ..." class="form-control chat_message">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning btn-flat chat_send">Send</button>
+                      </span>
+                </div>
+                {% csrf_token %}
+              </form>
+            </div>
+            <!-- /.box-footer-->
+          </div>
+          <!--/.direct-chat -->
+        </div>
+        <!-- /.col -->
+	{% endblock %}
+	
+	{% block js %}
+	{% endblock %}
+	
+  </body>
+</html>

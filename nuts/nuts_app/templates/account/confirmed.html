@@ -1,0 +1,24 @@
+{% extends "nuts/nuts_base.html" %}
+{% load staticfiles %}
+
+{% block title %}Email has been confirmed{% endblock %}
+{% block css %}
+<link href="{% static "nuts/css/account_manage.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="{% static 'nuts/css/AdminLTE.min.css' %}" rel="stylesheet">
+    <link href="{% static 'nuts/css/chat.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block container %}
+
+<div class="row confirm-div">
+<h3>Your have successfully confirmed your email address!</h3>
+<h3>Now, let's <a href="{% url 'login' %}">login</a> to Nuts!</h3>
+</div>
+
+{% endblock %}

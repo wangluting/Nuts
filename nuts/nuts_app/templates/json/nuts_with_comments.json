@@ -1,0 +1,23 @@
+{ "nuts" : [
+	  {% for nut in nuts %}
+	  {"author" : "{{nut.author}}", 
+	  "timestamp" : "{{nut.timestamp}}", 
+	  "title" : "{{nut.title}}", 
+	  "description" : "{{nut.description}}",
+	  "expire_time" : "{{nut.expire_time}}",
+	  "expires" : "{{nut.expires}}",
+	  "id": "{{nut.id}}",
+      "like_num":"{{nut.like_num}}",
+	  "user_id": "{{nut.user_id}}"}
+	  {% if not forloop.last %}, {% endif %}{% endfor %}
+  ],
+  "comments":[
+  	{% for comment in comments %}
+	{%spaceless%}
+	{% include 'json/comment.json' %}
+	{%endspaceless%}
+	{% if not forloop.last %}, 
+	{% endif %}{% endfor %}
+  ],
+  "user_like_plan_ids":"{{user_like_plan_ids}}"
+}
